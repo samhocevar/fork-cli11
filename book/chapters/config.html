@@ -1,0 +1,527 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Configuration files · CLI11 Tutorial</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Henry Schreiner">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-term/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="formatting.html" />
+    
+    
+    <link rel="prev" href="an-advanced-example.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installation.html">
+            
+                <a href="installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="basics.html">
+            
+                <a href="basics.html">
+            
+                    
+                    Basics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="flags.html">
+            
+                <a href="flags.html">
+            
+                    
+                    Flags
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="options.html">
+            
+                <a href="options.html">
+            
+                    
+                    Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="validators.html">
+            
+                <a href="validators.html">
+            
+                    
+                    Validators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="subcommands.html">
+            
+                <a href="subcommands.html">
+            
+                    
+                    Subcommands and the App
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="an-advanced-example.html">
+            
+                <a href="an-advanced-example.html">
+            
+                    
+                    An advanced example
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9" data-path="config.html">
+            
+                <a href="config.html">
+            
+                    
+                    Configuration files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="formatting.html">
+            
+                <a href="formatting.html">
+            
+                    
+                    Formatting help output
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="toolkits.html">
+            
+                <a href="toolkits.html">
+            
+                    
+                    Toolkits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="advanced-topics.html">
+            
+                <a href="advanced-topics.html">
+            
+                    
+                    Advanced topics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="internals.html">
+            
+                <a href="internals.html">
+            
+                    
+                    Internals
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Configuration files</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="accepting-configure-files">Accepting configure files</h1>
+<h2 id="reading-a-configure-file">Reading a configure file</h2>
+<p>You can tell your app to allow configure files with <code>set_config(&quot;--config&quot;)</code>. There are arguments: the first is the option name. If empty, it will clear the config flag. The second item is the default file name. If that is specified, the config will try to read that file. The third item is the help string, with a reasonable default, and the final argument is a boolean (default: false) that indicates that the configuration file is required and an error will be thrown if the file is not found and this is set to true.</p>
+<h3 id="extra-fields">Extra fields</h3>
+<p>Sometimes configuration files are used for multiple purposes so CLI11 allows options on how to deal with extra fields</p>
+<pre><code class="lang-cpp">app.allow_config_extras(<span class="hljs-literal">true</span>);
+</code></pre>
+<p>will allow capture the extras in the extras field of the app. (NOTE:  This also sets the <code>allow_extras</code> in the app to true)</p>
+<pre><code class="lang-cpp">app.allow_config_extras(<span class="hljs-literal">false</span>);
+</code></pre>
+<p>will generate an error if there are any extra fields</p>
+<p>for slightly finer control there is a scoped enumeration of the modes
+or</p>
+<pre><code class="lang-cpp">app.allow_config_extras(CLI::config_extras_mode::ignore);
+</code></pre>
+<p>will completely ignore extra parameters in the config file.   This mode is the default.</p>
+<pre><code class="lang-cpp">app.allow_config_extras(CLI::config_extras_mode::capture);
+</code></pre>
+<p>will store the unrecognized options in the app extras fields. This option is the closest equivalent to <code>app.allow_config_extras(true);</code> with the exception that it does not also set the <code>allow_extras</code> flag so using this option without also setting <code>allow_extras(true)</code> will generate an error which may or may not be the desired behavior.</p>
+<pre><code class="lang-cpp">app.allow_config_extras(CLI::config_extras_mode::error);
+</code></pre>
+<p>is equivalent to <code>app.allow_config_extras(false);</code></p>
+<h3 id="getting-the-used-configuration-file-name">Getting the used configuration file name</h3>
+<p>If it is needed to get the configuration file name used this can be obtained via
+<code>app.get_config_ptr()-&gt;as&lt;std::string&gt;()</code>  or
+<code>app[&quot;--config&quot;]-&gt;as&lt;std::string&gt;()</code> assuming <code>--config</code> was the configuration option name.</p>
+<h2 id="configure-file-format">Configure file format</h2>
+<p>Here is an example configuration file, in <a href="https://github.com/toml-lang/toml" target="_blank">TOML</a> format:</p>
+<pre><code class="lang-ini"><span class="hljs-comment"># Comments are supported, using a #</span>
+<span class="hljs-comment"># The default section is [default], case insensitive</span>
+
+<span class="hljs-attr">value</span> = <span class="hljs-number">1</span>
+<span class="hljs-attr">str</span> = <span class="hljs-string">&quot;A string&quot;</span>
+<span class="hljs-attr">vector</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+
+<span class="hljs-comment"># Section map to subcommands</span>
+<span class="hljs-section">[subcommand]</span>
+<span class="hljs-attr">in_subcommand</span> = Wow
+<span class="hljs-section">[subcommand.sub]</span>
+<span class="hljs-attr">subcommand</span> = <span class="hljs-literal">true</span> # could also be give as sub.subcommand=<span class="hljs-literal">true</span>
+</code></pre>
+<p>Spaces before and after the name and argument are ignored. Multiple arguments are separated by spaces. One set of quotes will be removed, preserving spaces (the same way the command line works). Boolean options can be <code>true</code>, <code>on</code>, <code>1</code>, <code>y</code>, <code>t</code>, <code>+</code>, <code>yes</code>, <code>enable</code>; or <code>false</code>, <code>off</code>, <code>0</code>, <code>no</code>, <code>n</code>, <code>f</code>, <code>-</code>, <code>disable</code>, (case insensitive). Sections (and <code>.</code> separated names) are treated as subcommands (note: this does not necessarily mean that subcommand was passed, it just sets the &quot;defaults&quot;. If a subcommand is set to <code>configurable</code> then passing the subcommand using <code>[sub]</code> in a configuration file will trigger the subcommand.)</p>
+<p>CLI11 also supports configuration file in INI format.</p>
+<pre><code class="lang-ini">; Comments are supported, using a ;
+; The default section is [default], case insensitive
+
+value = 1
+str = &quot;A string&quot;
+vector = 1 2 3
+
+; Section map to subcommands
+[subcommand]
+in_subcommand = Wow
+sub.subcommand = true
+</code></pre>
+<p>The main differences are in vector notation and comment character.  Note: CLI11 is not a full TOML parser as it just reads values as strings.  It is possible (but not recommended) to mix notation.</p>
+<h2 id="writing-out-a-configure-file">Writing out a configure file</h2>
+<p>To print a configuration file from the passed arguments, use <code>.config_to_str(default_also=false, write_description=false)</code>, where <code>default_also</code> will also show any defaulted arguments, and <code>write_description</code> will include option descriptions and the App description</p>
+<pre><code class="lang-cpp">
+ CLI::App app;
+ app.add_option(...);
+    <span class="hljs-comment">// several other options</span>
+ CLI11_PARSE(app, argc, argv);
+ <span class="hljs-comment">//the config printout should be after the parse to capture the given arguments</span>
+ <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span>&lt;&lt;app.config_to_str(<span class="hljs-literal">true</span>,<span class="hljs-literal">true</span>);
+</code></pre>
+<p>if a prefix is needed to print before the options, for example to print a config for just a subcommand, the config formatter can be obtained directly.</p>
+<pre><code class="lang-cpp">
+  <span class="hljs-keyword">auto</span> fmtr=app.get_config_formatter();
+  <span class="hljs-comment">//std::string to_config(const App *app, bool default_also, bool write_description, std::string prefix)</span>
+  fmtr-&gt;to_config(&amp;app,<span class="hljs-literal">true</span>,<span class="hljs-literal">true</span>,<span class="hljs-string">&quot;sub.&quot;</span>);
+  <span class="hljs-comment">//prefix can be used to set a prefix before each argument,  like &quot;sub.&quot;</span>
+</code></pre>
+<h3 id="customization-of-configure-file-output">Customization of configure file output</h3>
+<p>The default config parser/generator has some customization points that allow variations on the TOML format.  The default formatter has a base configuration that matches the TOML format.  It defines 5 characters that define how different aspects of the configuration are handled</p>
+<pre><code class="lang-cpp"><span class="hljs-comment">/// the character used for comments</span>
+<span class="hljs-keyword">char</span> commentChar = <span class="hljs-string">&apos;#&apos;</span>;
+<span class="hljs-comment">/// the character used to start an array &apos;\0&apos; is a default to not use</span>
+<span class="hljs-keyword">char</span> arrayStart = <span class="hljs-string">&apos;[&apos;</span>;
+<span class="hljs-comment">/// the character used to end an array &apos;\0&apos; is a default to not use</span>
+<span class="hljs-keyword">char</span> arrayEnd = <span class="hljs-string">&apos;]&apos;</span>;
+<span class="hljs-comment">/// the character used to separate elements in an array</span>
+<span class="hljs-keyword">char</span> arraySeparator = <span class="hljs-string">&apos;,&apos;</span>;
+<span class="hljs-comment">/// the character used separate the name from the value</span>
+<span class="hljs-keyword">char</span> valueDelimiter = <span class="hljs-string">&apos;=&apos;</span>;
+</code></pre>
+<p>These can be modified via setter functions</p>
+<ul>
+<li><code>ConfigBase *comment(char cchar)</code> Specify the character to start a comment block</li>
+<li><code>ConfigBase *arrayBounds(char aStart, char aEnd)</code>  Specify the start and end characters for an array</li>
+<li><code>ConfigBase *arrayDelimiter(char aSep)</code> Specify the delimiter character for an array</li>
+<li><code>ConfigBase *valueSeparator(char vSep)</code> Specify the delimiter between a name and value</li>
+</ul>
+<p>For example to specify reading a configure file that used <code>:</code> to separate name and values</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">auto</span> config_base=app.get_config_formatter_base();
+config_base-&gt;valueSeparator(<span class="hljs-string">&apos;:&apos;</span>);
+</code></pre>
+<p>The default configuration file will read INI files, but will write out files in the TOML format.  To specify outputting INI formatted files use</p>
+<pre><code class="lang-cpp">app.config_formatter(<span class="hljs-built_in">std</span>::make_shared&lt;CLI::ConfigINI&gt;());
+</code></pre>
+<p>which makes use of a predefined modification of the ConfigBase class which TOML also uses. If a custom formatter is used that is not inheriting from the from ConfigBase class `get_config_formatter_base() will return a nullptr if RTTI is on (usually the default), or garbage if RTTI is off, so some care must be exercised in its use with custom configurations.</p>
+<h2 id="custom-formats">Custom formats</h2>
+<p>You can invent a custom format and set that instead of the default INI formatter. You need to inherit from <code>CLI::Config</code> and implement the following two functions:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">std</span>::<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">to_config</span><span class="hljs-params">(<span class="hljs-keyword">const</span> CLI::App *app, <span class="hljs-keyword">bool</span> default_also, <span class="hljs-keyword">bool</span>, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>)</span> <span class="hljs-keyword">const</span></span>;
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;CLI::ConfigItem&gt; from_config(<span class="hljs-built_in">std</span>::istream &amp;input) <span class="hljs-keyword">const</span>;
+</code></pre>
+<p>The <code>CLI::ConfigItem</code>s that you return are simple structures with a name, a vector of parents, and a vector of results. A optionally customizable <code>to_flag</code> method on the formatter lets you change what happens when a ConfigItem turns into a flag.</p>
+<p>Finally, set your new class as new config formatter:</p>
+<pre><code class="lang-cpp">app.config_formatter(<span class="hljs-built_in">std</span>::make_shared&lt;NewConfig&gt;());
+</code></pre>
+<p>See <a href="https://github.com/CLIUtils/CLI11/blob/master/examples/json.cpp" target="_blank"><code>examples/json.cpp</code></a> for a complete JSON config example.</p>
+<h2 id="triggering-subcommands">Triggering Subcommands</h2>
+<p>Configuration files can be used to trigger subcommands if a subcommand is set to configure.  By default configuration file just set the default values of a subcommand.  But if the <code>configure()</code> option is set on a subcommand then the if the subcommand is utilized via a <code>[subname]</code> block in the configuration file it will act as if it were called from the command line.  Subsubcommands can be triggered via [subname.subsubname].  Using the <code>[[subname]]</code> will be as if the subcommand were triggered multiple times from the command line.  This functionality can allow the configuration file to act as a scripting file.</p>
+<p>For custom configuration files this behavior can be triggered by specifying the parent subcommands in the structure and <code>++</code> as the name to open a new subcommand scope and <code>--</code> to close it.  These names trigger the different callbacks of configurable subcommands.</p>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<p>The config file input works with any form of the option given:  Long, short, positional, or the environment variable name.  When generating a config file it will create a name in following priority.</p>
+<ol>
+<li>First long name</li>
+<li>Positional name</li>
+<li>First short name</li>
+<li>Environment name</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="an-advanced-example.html" class="navigation navigation-prev " aria-label="Previous page: An advanced example">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="formatting.html" class="navigation navigation-next " aria-label="Next page: Formatting help output">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Configuration files","level":"1.9","depth":1,"next":{"title":"Formatting help output","level":"1.10","depth":1,"path":"chapters/formatting.md","ref":"chapters/formatting.md","articles":[]},"previous":{"title":"An advanced example","level":"1.8","depth":1,"path":"chapters/an-advanced-example.md","ref":"chapters/an-advanced-example.md","articles":[]},"dir":"ltr"},"config":{"plugins":["include-codeblock","term","hints"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search":{},"term":{"copyButtons":true,"fade":true,"lineStyles":true,"prompt":"(?<prompt>[^\\$^#^:]*)(?<pathsep>:?)(?<path>[^\\$^#]*?)(?<delimiter>[\\$#] )(?<command>.*)$","style":"default"},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"include-codeblock":{"check":false,"edit":false,"fixlang":true,"lang":"","template":"default","theme":"chrome","unindent":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Henry Schreiner","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"CLI11 Tutorial","gitbook":"*","description":"A set of examples and detailed information about CLI11"},"file":{"path":"chapters/config.md","mtime":"2020-06-02T03:07:26.619Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-02T03:11:46.744Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-term/clipboard.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-term/initclip.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-term/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
