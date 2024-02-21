@@ -1040,6 +1040,8 @@ CLI11_NODISCARD CLI11_INLINE detail::Classifier App::_recognize(const std::strin
         return detail::Classifier::SUBCOMMAND;
     if(detail::split_long(current, dummy1, dummy2))
         return detail::Classifier::LONG;
+    if(detail::split_long("-" + current, dummy1, dummy2))
+        return detail::Classifier::MEDIUM;
     if(detail::split_short(current, dummy1, dummy2)) {
         if(dummy1[0] >= '0' && dummy1[0] <= '9') {
             if(get_option_no_throw(std::string{'-', dummy1[0]}) == nullptr) {
@@ -1584,6 +1586,7 @@ CLI11_INLINE bool App::_parse_single(std::vector<std::string> &args, bool &posit
         retval = _parse_subcommand(args);
         break;
     case detail::Classifier::LONG:
+    case detail::Classifier::MEDIUM:
     case detail::Classifier::SHORT:
     case detail::Classifier::WINDOWS_STYLE:
         // If already parsed a subcommand, don't accept options_
@@ -1809,10 +1812,15 @@ App::_parse_arg(std::vector<std::string> &args, detail::Classifier current_type,
     std::string value;
     std::string rest;
 
+retry:
     switch(current_type) {
     case detail::Classifier::LONG:
         if(!detail::split_long(current, arg_name, value))
             throw HorribleError("Long parsed but missing (you should not see this):" + args.back());
+        break;
+    case detail::Classifier::MEDIUM:
+        if(!detail::split_long("-" + current, arg_name, value))
+            throw HorribleError("Medium parsed but missing (you should not see this):" + args.back());
         break;
     case detail::Classifier::SHORT:
         if(!detail::split_short(current, arg_name, rest))
@@ -1833,11 +1841,17 @@ App::_parse_arg(std::vector<std::string> &args, detail::Classifier current_type,
     auto op_ptr = std::find_if(std::begin(options_), std::end(options_), [arg_name, current_type](const Option_p &opt) {
         if(current_type == detail::Classifier::LONG)
             return opt->check_lname(arg_name);
-        if(current_type == detail::Classifier::SHORT)
+        if(current_type == detail::Classifier::SHORT || current_type == detail::Classifier::MEDIUM)
             return opt->check_sname(arg_name);
         // this will only get called for detail::Classifier::WINDOWS_STYLE
         return opt->check_lname(arg_name) || opt->check_sname(arg_name);
     });
+
+    // Medium option not found, parse again as a group of short options
+    if(op_ptr == std::end(options_) && current_type == detail::Classifier::MEDIUM) {
+        current_type = detail::Classifier::SHORT;
+        goto retry;
+    }
 
     // Option not found
     if(op_ptr == std::end(options_)) {
