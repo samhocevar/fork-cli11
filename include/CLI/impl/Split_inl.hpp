@@ -111,8 +111,8 @@ get_names(const std::vector<std::string> &input) {
             continue;
         }
         if(name.length() > 1 && name[0] == '-' && name[1] != '-') {
-            if(name.length() == 2 && valid_first_char(name[1]))
-                short_names.emplace_back(1, name[1]);
+            if(valid_first_char(name[1]))
+                short_names.push_back(name.substr(1));
             else if(name.length() > 2)
                 throw BadNameString::MissingDash(name);
             else
